@@ -1,26 +1,146 @@
 @import "tailwindcss";
 
+@utility container{
+  margin: auto;
+  inline-padding: 2rem;
+}
+
+@theme {
+  --color-brand: #7364DB;
+  --color-secondary: #8B8B93;
+  --color-green: #50D1B2;
+  --color-sada: #F1F1F1;
+  --color-dark: #1F2128;
+}
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --bg: #0f111a;
+  --surface: #1f2128;
+  --muted: #8b8b93;
+  --text: #f1f1f1;
+  --accent: #7364db;
+  --accent-2: #d38a3a;
+  --border: rgba(255, 255, 255, 0.08);
+  --shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+  font-family: "Inter", system-ui, -apple-system, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+body.theme-light {
+  --bg: #f7f7ff;
+  --surface: #ffffff;
+  --muted: #5c5f70;
+  --text: #161722;
+  --accent: #5c6bf5;
+  --accent-2: #d38a3a;
+  --border: rgba(0, 0, 0, 0.08);
+  --shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+}
+
+body.theme-dark {
+  --bg: #0f111a;
+  --surface: #1f2128;
+  --muted: #8b8b93;
+  --text: #f1f1f1;
+  --accent: #7364db;
+  --accent-2: #d38a3a;
+  --border: rgba(255, 255, 255, 0.08);
+  --shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+}
+
+/* Toggle control for moon/sun switch and action icon */
+.toggle-bar {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  background: #222633;
+  color: #8b8b93;
+  border-radius: 14px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.toggle-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  color: inherit;
+  opacity: 0.7;
+  transition: opacity 0.2s ease;
+}
+
+.toggle-icon.active {
+  color: #d38a3a;
+  opacity: 1;
+}
+
+.toggle-divider {
+  width: 1px;
+  height: 24px;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.toggle-switch {
+  position: relative;
+  width: 48px;
+  height: 24px;
+}
+
+
+.toggle-switch input {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  cursor: pointer;
+  z-index: 2;
+}
+
+.toggle-switch-track {
+  position: absolute;
+  inset: 0;
+  background: #2f3140;
+  border-radius: 999px;
+}
+
+.toggle-switch-thumb {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 18px;
+  height: 18px;
+  background: #7364db;
+  border-radius: 50%;
+  transition: transform 0.2s ease;
+}
+
+.toggle-switch input:checked ~ .toggle-switch-thumb {
+  transform: translateX(24px);
+}
+
+.toggle-action {
+  width: 32px;
+  height: 32px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.02);
+  color: #8b8b93;
+  transition: border-color 0.2s ease, color 0.2s ease, background 0.2s ease;
+}
+
+.toggle-action:hover {
+  border-color: rgba(255, 255, 255, 0.2);
+  color: #d7d7e0;
+  background: rgba(255, 255, 255, 0.05);
 }
