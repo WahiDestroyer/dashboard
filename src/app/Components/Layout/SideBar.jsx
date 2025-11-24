@@ -2,17 +2,23 @@
 
 import React, { useEffect, useState } from "react";
 import Toggle from "../ui/Toggle";
+import logo from "../../../../public/LogoDark.png";
+import Image from "next/image";
+import { LuChartSpline } from "react-icons/lu";
+import { FaChevronLeft } from "react-icons/fa";
+import { FaChevronRight } from "react-icons/fa";
 
-const navItems = [
-  { label: "Dashboard", icon: "🔍", active: true },
-  { label: "Products", icon: "📦" },
-  { label: "Orders", icon: "🧾" },
-  { label: "Payments", icon: "💳" },
-  { label: "Transactions", icon: "💱" },
-  { label: "Clients", icon: "👥" },
+
+const NAV_ITEMS = [
+  { label: "Dashboard", icon: <LuChartSpline />, active: true },
+  { label: "Products", icon: "PR" },
+  { label: "Orders", icon: "OR" },
+  { label: "Payments", icon: "PY" },
+  { label: "Transactions", icon: "TR" },
+  { label: "Clients", icon: "CL" },
 ];
 
-const categories = [
+const CATEGORIES = [
   { label: "Laptops", color: "#ffd54f" },
   { label: "Mobile phones", color: "#ff6f6f" },
   { label: "Desktops", color: "#7c6bff" },
@@ -21,39 +27,36 @@ const categories = [
   { label: "Networking", color: "#50d1b2" },
 ];
 
-const avatars = [
-  "#d97706",
-  "#6366f1",
-  "#f43f5e",
-  "#06b6d4",
-  "#84cc16",
-  "#c084fc",
-];
+const AVATAR_COLORS = ["#d97706", "#6366f1", "#f43f5e", "#06b6d4", "#84cc16", "#c084fc"];
 
-const SideBar = () => {
+const Sidebar = () => {
   const [isLight, setIsLight] = useState(false);
+  const [isOpen, setIsOpen] = useState(true);
 
   useEffect(() => {
-    document.body.classList.toggle("theme-light", isLight);
-    document.body.classList.toggle("theme-dark", !isLight);
+    const body = document.body;
+    body.classList.remove("theme-light", "theme-dark");
+    body.classList.add(isLight ? "theme-light" : "theme-dark");
   }, [isLight]);
 
   return (
-    <aside
-      className="w-64 min-h-screen flex flex-col justify-between"
-      style={{ background: "var(--surface)", color: "var(--text)" }}
-    >
+    <div className="fixed top-0 left-0 z-50 h-screen w-64">
+      <aside
+        className="w-64 min-h-screen flex flex-col justify-between transition-transform duration-300"
+        style={{
+          background: "var(--surface)",
+          color: "var(--text)",
+          transform: isOpen ? "translateX(0)" : "translateX(-100%)",
+        }}
+      >
       <div className="p-4 space-y-6">
-        <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-purple-500 to-indigo-600 flex items-center justify-center text-white text-xl shadow-lg">
-            F
-          </div>
-          <div className="text-lg font-semibold">Frox</div>
-          <span className="ml-auto text-sm text-[var(--muted)]">↗</span>
-        </div>
+        <header className="flex items-center gap-3">
+          <Image src={logo} alt="logo"/>
+          <span className="ml-auto text-sm text-[var(--muted)]">PRO</span>
+        </header>
 
         <nav className="space-y-2">
-          {navItems.map((item) => (
+          {NAV_ITEMS.map((item) => (
             <button
               key={item.label}
               className={`w-full flex items-center gap-3 px-3 py-2 rounded-xl text-sm transition ${
@@ -62,7 +65,7 @@ const SideBar = () => {
                   : "hover:bg-[rgba(255,255,255,0.06)] text-[var(--muted)]"
               }`}
             >
-              <span>{item.icon}</span>
+              <span className="text-xs font-semibold">{item.icon}</span>
               <span className="flex-1 text-left">{item.label}</span>
             </button>
           ))}
@@ -70,36 +73,29 @@ const SideBar = () => {
 
         <div className="border-t" style={{ borderColor: "var(--border)" }} />
 
-        <div className="space-y-3">
-          <div className="text-xs uppercase tracking-wide text-[var(--muted)]">
-            Categories
-          </div>
+        <section className="space-y-3">
+          <div className="text-xs uppercase tracking-wide text-[var(--muted)]">Categories</div>
           <div className="space-y-2">
-            {categories.map((cat) => (
+            {CATEGORIES.map((cat) => (
               <div
                 key={cat.label}
                 className="flex items-center justify-between text-sm text-[var(--text)]"
               >
                 <span>{cat.label}</span>
-                <span
-                  className="w-3 h-3 rounded-full"
-                  style={{ background: cat.color }}
-                />
+                <span className="w-3 h-3 rounded-full" style={{ background: cat.color }} />
               </div>
             ))}
             <button className="flex items-center gap-2 text-sm text-[var(--muted)] hover:text-[var(--text)] transition">
-              <span className="text-lg">＋</span>
+              <span className="text-lg font-semibold">+</span>
               <span>Add category</span>
             </button>
           </div>
-        </div>
+        </section>
 
-        <div className="space-y-2">
-          <div className="text-xs uppercase tracking-wide text-[var(--muted)]">
-            Top sellers
-          </div>
+        <section className="space-y-2">
+          <div className="text-xs uppercase tracking-wide text-[var(--muted)]">Top sellers</div>
           <div className="flex items-center gap-2">
-            {avatars.map((color, idx) => (
+            {AVATAR_COLORS.map((color, idx) => (
               <span
                 key={color + idx}
                 className="w-9 h-9 rounded-full border-2"
@@ -120,9 +116,9 @@ const SideBar = () => {
               36
             </span>
           </div>
-        </div>
+        </section>
 
-        <div
+        <section
           className="rounded-2xl p-4 shadow"
           style={{ background: "var(--bg)", boxShadow: "var(--shadow)" }}
         >
@@ -131,7 +127,7 @@ const SideBar = () => {
             <span className="w-1.5 h-1.5 rounded-full bg-[var(--accent)]" />
           </div>
           <div className="w-24 h-24 mx-auto mb-3 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-2xl flex items-center justify-center text-4xl text-white">
-            🛍️
+            PRO
           </div>
           <div className="text-sm text-[var(--text)] mb-2 leading-tight">
             Unlock more by upgrading to Pro.
@@ -139,14 +135,23 @@ const SideBar = () => {
           <button className="w-full mt-2 bg-[var(--accent)] text-white text-sm font-semibold py-2 rounded-xl shadow hover:brightness-110 transition">
             Upgrade now
           </button>
-        </div>
+        </section>
       </div>
 
-      <div className="p-4">
-        <Toggle onToggle={setIsLight} />
-      </div>
-    </aside>
+        <div className="p-4">
+          <Toggle onToggle={setIsLight} />
+        </div>
+      </aside>
+      <button
+        type="button"
+        className="absolute top-4 -right-6 z-50 w-10 h-10 rounded-full text-sm font-semibold border shadow transition bg-[var(--surface)] text-[var(--text)] hover:bg-[rgba(255,255,255,0.05)] flex items-center justify-center"
+        style={{ borderColor: "var(--border)" }}
+        onClick={() => setIsOpen((open) => !open)}
+      >
+        {isOpen ? <FaChevronLeft /> : <FaChevronRight />}
+      </button>
+    </div>
   );
 };
 
-export default SideBar;
+export default Sidebar;

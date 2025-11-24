@@ -6,8 +6,13 @@ import { FiSearch, FiCompass, FiBell, FiSettings } from "react-icons/fi";
 const Navbar = () => {
   return (
     <nav
-      className="w-full flex items-center gap-4 px-6 py-4 sticky top-0 z-10"
-      style={{ background: "var(--bg)", color: "var(--text)" }}
+      className="fixed top-0 right-0 flex items-center gap-4 px-6 py-4 z-40"
+      style={{
+        background: "var(--bg)",
+        color: "var(--text)",
+        borderBottom: "1px solid var(--border)",
+        left: "16rem",
+      }}
     >
       <div
         className="flex items-center gap-3 flex-1 max-w-lg px-3 py-2 rounded-xl border"
