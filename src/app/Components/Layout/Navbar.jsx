@@ -1,22 +1,71 @@
-import React from 'react'
-import Toggle from "../Components/ui/Toggle";
+"use client";
 
+import React from "react";
+import { FiSearch, FiCompass, FiBell, FiSettings } from "react-icons/fi";
 
 const Navbar = () => {
-   const handleTheme = (isLight) => {
-    // hook into your theme switcher here
-    console.log("light mode?", isLight);
-  };
-
-  const handleAction = () => {
-    // do whatever your square icon should trigger
-    console.log("action click");
-  };
   return (
-    <div>
-      
-    </div>
-  )
-}
+    <nav
+      className="w-full flex items-center gap-4 px-6 py-4 sticky top-0 z-10"
+      style={{ background: "var(--bg)", color: "var(--text)" }}
+    >
+      <div
+        className="flex items-center gap-3 flex-1 max-w-lg px-3 py-2 rounded-xl border"
+        style={{
+          background: "#161922",
+          borderColor: "var(--border)",
+          boxShadow: "0 10px 30px rgba(0,0,0,0.25)",
+        }}
+      >
+        <FiSearch className="text-[var(--muted)]" size={18} />
+        <input
+          type="text"
+          placeholder="Search"
+          className="bg-transparent outline-none text-sm w-full placeholder-[var(--muted)]"
+          style={{ color: "var(--text)" }}
+        />
+      </div>
 
-export default Navbar
+      <button
+        className="flex items-center gap-2 px-3 py-2 text-sm font-medium rounded-xl border"
+        style={{
+          background: "#161922",
+          borderColor: "var(--border)",
+          color: "var(--muted)",
+        }}
+      >
+        <FiCompass size={18} />
+        <span>Browse</span>
+      </button>
+
+      <div className="flex items-center gap-3 ml-auto text-[var(--muted)]">
+        <button
+          className="w-10 h-10 rounded-full border flex items-center justify-center hover:text-[var(--text)] transition"
+          style={{ borderColor: "var(--border)", background: "#161922" }}
+          aria-label="Notifications"
+        >
+          <FiBell size={18} />
+        </button>
+        <button
+          className="w-10 h-10 rounded-full border flex items-center justify-center hover:text-[var(--text)] transition"
+          style={{ borderColor: "var(--border)", background: "#161922" }}
+          aria-label="Settings"
+        >
+          <FiSettings size={18} />
+        </button>
+        <span
+          className="w-10 h-10 rounded-full border flex items-center justify-center text-sm font-semibold shadow"
+          style={{
+            borderColor: "var(--border)",
+            background: "linear-gradient(135deg, #8a5cf5, #f76b8a)",
+            color: "#fff",
+          }}
+        >
+          <span aria-hidden="true">A</span>
+        </span>
+      </div>
+    </nav>
+  );
+};
+
+export default Navbar;
