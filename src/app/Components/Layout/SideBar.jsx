@@ -33,23 +33,36 @@ const Sidebar = () => {
   const [isLight, setIsLight] = useState(false);
   const [isOpen, setIsOpen] = useState(true);
 
+  const sidebarWidth = isOpen ? "16rem" : "0rem";
+
   useEffect(() => {
     const body = document.body;
     body.classList.remove("theme-light", "theme-dark");
     body.classList.add(isLight ? "theme-light" : "theme-dark");
   }, [isLight]);
 
+  useEffect(() => {
+    const body = document.body;
+    body.style.setProperty("--sidebar-width", sidebarWidth);
+    return () => {
+      body.style.setProperty("--sidebar-width", "16rem");
+    };
+  }, [sidebarWidth]);
+
   return (
-    <div className="fixed top-0 left-0 z-50 h-screen w-64">
+    <div
+      className="fixed top-0 left-0 z-50 h-screen"
+      style={{ width: sidebarWidth, overflow: "visible" }}
+    >
       <aside
-        className="w-64 min-h-screen flex flex-col justify-between transition-transform duration-300"
+        className="w-64 h-screen flex flex-col transition-transform duration-300 overflow-y-auto sidebar-scroll"
         style={{
           background: "var(--surface)",
           color: "var(--text)",
           transform: isOpen ? "translateX(0)" : "translateX(-100%)",
         }}
       >
-      <div className="p-4 space-y-6">
+      <div className="p-4 space-y-6 flex-1 pr-2">
         <header className="flex items-center gap-3">
           <Image src={logo} alt="logo"/>
           <span className="ml-auto text-sm text-[var(--muted)]">PRO</span>
@@ -138,14 +151,17 @@ const Sidebar = () => {
         </section>
       </div>
 
-        <div className="p-4">
+        <div className="p-4 pt-0">
           <Toggle onToggle={setIsLight} />
         </div>
       </aside>
       <button
         type="button"
-        className="absolute top-4 -right-6 z-50 w-10 h-10 rounded-full text-sm font-semibold border shadow transition bg-[var(--surface)] text-[var(--text)] hover:bg-[rgba(255,255,255,0.05)] flex items-center justify-center"
-        style={{ borderColor: "var(--border)" }}
+        className="absolute top-4 z-50 w-10 h-10 rounded-full text-sm font-semibold border shadow transition bg-[var(--surface)] text-[var(--text)] hover:bg-[rgba(255,255,255,0.05)] flex items-center justify-center"
+        style={{
+          borderColor: "var(--border)",
+          left: isOpen ? "15.5rem" : "0.5rem",
+        }}
         onClick={() => setIsOpen((open) => !open)}
       >
         {isOpen ? <FaChevronLeft /> : <FaChevronRight />}

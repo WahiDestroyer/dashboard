@@ -2,18 +2,20 @@
 
 import React from "react";
 import { FiSearch, FiCompass, FiBell, FiSettings } from "react-icons/fi";
+import logo from "../../../../public/LogoDark.png";
+import Image from "next/image";
 
 const Navbar = () => {
   return (
     <nav
-      className="fixed top-0 right-0 flex items-center gap-4 px-6 py-4 z-40"
+      className="sticky top-0 flex items-center gap-4 px-6 py-4 z-20"
       style={{
         background: "var(--bg)",
         color: "var(--text)",
         borderBottom: "1px solid var(--border)",
-        left: "16rem",
       }}
     >
+      <Image src={logo} alt="logo"/>
       <div
         className="flex items-center gap-3 flex-1 max-w-lg px-3 py-2 rounded-xl border"
         style={{
