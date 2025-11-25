@@ -4,18 +4,27 @@ import React, { useEffect, useState } from "react";
 import Toggle from "../ui/Toggle";
 import logo from "../../../../public/LogoDark.png";
 import Image from "next/image";
+import { usePathname, useRouter } from "next/navigation";
 import { LuChartSpline } from "react-icons/lu";
 import { FaChevronLeft } from "react-icons/fa";
 import { FaChevronRight } from "react-icons/fa";
+import { BsShop } from "react-icons/bs";
+import { GoChecklist } from "react-icons/go";
+import { MdPayment } from "react-icons/md";
+import { AiOutlineSwap } from "react-icons/ai";
+import { BsPeople } from "react-icons/bs";
+
+
+
 
 
 const NAV_ITEMS = [
-  { label: "Dashboard", icon: <LuChartSpline />, active: true },
-  { label: "Products", icon: "PR" },
-  { label: "Orders", icon: "OR" },
-  { label: "Payments", icon: "PY" },
-  { label: "Transactions", icon: "TR" },
-  { label: "Clients", icon: "CL" },
+  { label: "Dashboard", icon: <LuChartSpline />, href: "/" },
+  { label: "Products", icon: <BsShop/>, href: "/products" },
+  { label: "Orders", icon: <GoChecklist/> , href: "/orders" },
+  { label: "Payments", icon: <MdPayment/> , href: "/payments" },
+  { label: "Transactions", icon: <AiOutlineSwap/>, href: "/transactions"  },
+  { label: "Clients", icon: <BsPeople/> , href: "/clients" },
 ];
 
 const CATEGORIES = [
@@ -32,6 +41,9 @@ const AVATAR_COLORS = ["#d97706", "#6366f1", "#f43f5e", "#06b6d4", "#84cc16", "#
 const Sidebar = () => {
   const [isLight, setIsLight] = useState(false);
   const [isOpen, setIsOpen] = useState(true);
+  const [activeNav, setActiveNav] = useState(NAV_ITEMS[0]?.label ?? "");
+  const pathname = usePathname();
+  const router = useRouter();
 
   const sidebarWidth = isOpen ? "16rem" : "0rem";
 
@@ -51,11 +63,11 @@ const Sidebar = () => {
 
   return (
     <div
-      className="fixed top-0 left-0 z-50 h-screen"
+      className=" fixed top-0 left-0 z-50 h-screen"
       style={{ width: sidebarWidth, overflow: "visible" }}
     >
       <aside
-        className="w-64 h-screen flex flex-col transition-transform duration-300 overflow-y-auto sidebar-scroll"
+        className="w-64 px-2 h-screen flex flex-col transition-transform duration-300 overflow-y-auto sidebar-scroll"
         style={{
           background: "var(--surface)",
           color: "var(--text)",
@@ -72,13 +84,18 @@ const Sidebar = () => {
           {NAV_ITEMS.map((item) => (
             <button
               key={item.label}
-              className={`w-full flex items-center gap-3 px-3 py-2 rounded-xl text-sm transition ${
-                item.active
+              type="button"
+              onClick={() => {
+                setActiveNav(item.label);
+                if (item.href) router.push(item.href);
+              }}
+              className={`w-full flex items-center gap-3 px-3 py-2 rounded-xl text-base transition ${
+                (item.href ? pathname === item.href : activeNav === item.label)
                   ? "bg-[var(--accent)] text-white shadow"
                   : "hover:bg-[rgba(255,255,255,0.06)] text-[var(--muted)]"
               }`}
             >
-              <span className="text-xs font-semibold">{item.icon}</span>
+              <span className="font-bold">{item.icon}</span>
               <span className="flex-1 text-left">{item.label}</span>
             </button>
           ))}
@@ -157,10 +174,10 @@ const Sidebar = () => {
       </aside>
       <button
         type="button"
-        className="absolute top-4 z-50 w-10 h-10 rounded-full text-sm font-semibold border shadow transition bg-[var(--surface)] text-[var(--text)] hover:bg-[rgba(255,255,255,0.05)] flex items-center justify-center"
+        className="absolute top-13 z-50 w-10 h-10 rounded-full text-sm font-semibold border shadow transition bg-[var(--surface)] text-[var(--text)] hover:bg-[rgba(255,255,255,0.05)] flex items-center justify-center"
         style={{
           borderColor: "var(--border)",
-          left: isOpen ? "15.5rem" : "0.5rem",
+          left: isOpen ? "14.7rem" : "0.5rem",
         }}
         onClick={() => setIsOpen((open) => !open)}
       >
