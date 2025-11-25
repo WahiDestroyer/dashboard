@@ -91,8 +91,8 @@ const Sidebar = () => {
               }}
               className={`w-full flex items-center gap-3 px-3 py-2 rounded-xl text-base transition ${
                 (item.href ? pathname === item.href : activeNav === item.label)
-                  ? "bg-[var(--accent)] text-white shadow"
-                  : "hover:bg-[rgba(255,255,255,0.06)] text-[var(--muted)]"
+                  ? "bg-(--accent) text-white shadow"
+                  : "hover:bg-[rgba(255,255,255,0.06)] text-(--muted)"
               }`}
             >
               <span className="font-bold">{item.icon}</span>
