@@ -1,5 +1,6 @@
+"use client";
 import Link from "next/link";
-import React from "react";
+import React, { useState } from "react";
 import { IoChevronForwardSharp } from "react-icons/io5";
 import { GoHome } from "react-icons/go";
 import ProductItems from "@/app/Components/Products/ProductItems";
@@ -148,10 +149,9 @@ const products = [
   },
 ];
 
-const listColumns =
-  "grid grid-cols-[72px,1.6fr,1fr,0.9fr,0.9fr,0.7fr,0.8fr,0.9fr,0.8fr] items-center";
-
 const page = () => {
+  const [view, setView] = useState("list");
+
   return (
     <div className="m-6 space-y-6">
       <div className="flex items-center justify-between pb-7">
@@ -168,40 +168,84 @@ const page = () => {
           </div>
         </div>
         <div>
-          <Layout />
+          <Layout mode={view} onChange={setView} />
         </div>
       </div>
 
-      <div className="card overflow-hidden">
-        <div className="flex items-center gap-2 px-4 py-3 border-b border-[var(--border)] text-sm text-(--muted)">
-          <span className="text-white font-semibold">Products</span>
-          <span className="text-xs bg-[var(--accent)]/15 text-[var(--accent)] px-2 py-0.5 rounded-full">
-            {products.length} items
-          </span>
-        </div>
-        <div className="overflow-x-auto">
-          <div className="min-w-[1100px] divide-y divide-[var(--border)]">
-            <div
-              className={`${listColumns} px-4 py-3 text-xs uppercase tracking-wide text-(--muted)`}
-            >
-              <span>Image</span>
-              <span>Name</span>
-              <span>SKU</span>
-              <span>Price</span>
-              <span>Status</span>
-              <span>Size</span>
-              <span>Qty</span>
-              <span>Rating</span>
-              <span>Sales</span>
+      {view === "list" ? (
+        <div className="card overflow-hidden">
+          <div className="flex items-center gap-2 px-4 py-3 border-b border-[var(--border)] text-sm text-(--muted)">
+            <span className="text-white font-semibold">Products</span>
+            <span className="text-xs bg-[var(--accent)]/15 text-[var(--accent)] px-2 py-0.5 rounded-full">
+              {products.length} items
+            </span>
+          </div>
+          <div className="overflow-x-auto">
+            <div className="min-w-[1100px] divide-y divide-[var(--border)]">
+              <div className="flex items-center gap-4 px-4 py-3 text-xs uppercase tracking-wide text-(--muted)">
+                <span className="w-[72px] flex-shrink-0">Image</span>
+                <span className="flex-[1.6] min-w-[180px]">Name</span>
+                <span className="flex-1">SKU</span>
+                <span className="flex-[0.9]">Price</span>
+                <span className="flex-[0.9]">Status</span>
+                <span className="flex-[0.7]">Size</span>
+                <span className="flex-[0.8]">Qty</span>
+                <span className="flex-[0.9]">Rating</span>
+                <span className="flex-[0.8]">Sales</span>
+              </div>
+              {products.map((item) => (
+                <ProductItems key={item.id} product={item} />
+              ))}
             </div>
-            {products.map((item) => (
-              <ProductItems key={item.id} product={item} />
-            ))}
           </div>
         </div>
-      </div>
+      ) : (
+        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
+          {products.map((item) => (
+            <div
+              key={item.id}
+              className="card p-4 space-y-3 hover:bg-white/5 transition-colors"
+            >
+              <div className="flex items-center gap-3">
+                <img
+                  src={item.image}
+                  alt={item.name}
+                  className="h-12 w-12 rounded-xl object-cover bg-[var(--surface)] ring-1 ring-[var(--border)]"
+                />
+                <div>
+                  <p className="text-white font-semibold">{item.name}</p>
+                  <p className="text-xs text-(--muted)">{item.sku}</p>
+                </div>
+              </div>
+              <p className="text-sm text-(--muted) leading-tight">{item.desc}</p>
+              <div className="flex items-center justify-between text-sm text-white">
+                <span className="font-semibold">{item.price}</span>
+                <span className="inline-flex items-center gap-2 text-xs px-2 py-1 rounded-full bg-[var(--accent)]/15 text-[var(--accent)]">
+                  <span className="h-2 w-2 rounded-full bg-[var(--accent)]" />
+                  {item.status}
+                </span>
+              </div>
+              <div className="grid grid-cols-3 gap-2 text-xs text-(--muted)">
+                <div>
+                  <p className="text-white font-semibold">{item.size}</p>
+                  <p>Size</p>
+                </div>
+                <div>
+                  <p className="text-white font-semibold">{item.qty}</p>
+                  <p>Qty</p>
+                </div>
+                <div>
+                  <p className="text-white font-semibold">{item.sales}</p>
+                  <p>Sales</p>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 };
 
 export default page;
+
