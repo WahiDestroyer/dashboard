@@ -202,9 +202,10 @@ const page = () => {
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
           {products.map((item) => (
-            <div
+            <Link
               key={item.id}
-              className="card p-4 space-y-3 hover:bg-white/5 transition-colors"
+              href="/productdetails"
+              className="card p-4 space-y-3 hover:bg-white/5 transition-colors block"
             >
               <div className="flex items-center gap-3">
                 <img
@@ -239,7 +240,7 @@ const page = () => {
                   <p>Sales</p>
                 </div>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
       )}
@@ -248,4 +249,3 @@ const page = () => {
 };
 
 export default page;
-
