@@ -1,8 +1,9 @@
 
 
-import React from "react";
+import React, { useState } from "react";
 import { AiFillStar } from "react-icons/ai";
 import Image from "next/image";
+import Link from "next/link";
 
 const renderStars = (value) =>
   Array.from({ length: 5 }).map((_, idx) => (
@@ -30,16 +31,25 @@ const ProductItems = ({ product }) => {
     sales,
   } = product;
 
+  const fallbackSrc = "/LogoDark.png";
+  const [imgSrc, setImgSrc] = useState(image || fallbackSrc);
+
   return (
     <div className="card bg-transparent">
-      <div className="flex items-center gap-4 px-4 py-4 hover:bg-[#181b25] transition-colors text-sm">
+      <Link
+        href="/productdetails"
+        className="flex items-center gap-4 px-4 py-4 hover:bg-[#181b25] transition-colors text-sm"
+      >
         <div className="w-[72px] flex-shrink-0">
           <Image
-            src={image}
+            src={imgSrc}
             alt={name}
             width={48}
             height={48}
-            className="h-12 w-12 rounded-xl object-cover bg-[var(--surface)] ring-1 ring-[var(--border)] shadow-[0_10px_25px_rgba(0,0,0,0.25)]"
+            onError={() => {
+              if (imgSrc !== fallbackSrc) setImgSrc(fallbackSrc);
+            }}
+            className="h-12 w-12 rounded-xl object-cover bg-(--surface) ring-1 ring-(--border) shadow-[0_10px_25px_rgba(0,0,0,0.25)]"
           />
         </div>
         <div className="flex-[1.6] min-w-[180px] space-y-1">
@@ -59,7 +69,7 @@ const ProductItems = ({ product }) => {
           <span className="text-(--muted) text-xs">{rating.toFixed(1)}</span>
         </div>
         <span className="flex-[0.8] text-white">{sales}</span>
-      </div>
+      </Link>
     </div>
   );
 };

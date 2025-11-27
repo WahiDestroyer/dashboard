@@ -19,7 +19,7 @@ const products = [
     rating: 4.8,
     sales: "186 / 2038",
     image:
-      "https://images.unsplash.com/photo-1542293787938-4d2720d45ff4?auto=format&fit=crop&w=200&q=80",
+      "https://images.unsplash.com/photo-1679421253067-b5adad691552?q=80&w=880&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
   },
   {
     id: 2,
@@ -61,7 +61,7 @@ const products = [
     rating: 5,
     sales: "186 / 2038",
     image:
-      "https://images.unsplash.com/photo-1518449037360-1858ba38e3c4?auto=format&fit=crop&w=200&q=80",
+      "https://images.unsplash.com/photo-1641457474717-26e699f45414?q=80&w=880&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
   },
   {
     id: 5,
@@ -89,7 +89,7 @@ const products = [
     rating: 4.8,
     sales: "186 / 2038",
     image:
-      "https://images.unsplash.com/photo-1495107334309-fcf20504a5ab?auto=format&fit=crop&w=200&q=80",
+      "https://images.unsplash.com/photo-1710934443296-d00b8c78110e?q=80&w=880&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
   },
   {
     id: 7,
@@ -174,16 +174,16 @@ const page = () => {
 
       {view === "list" ? (
         <div className="card overflow-hidden">
-          <div className="flex items-center gap-2 px-4 py-3 border-b border-[var(--border)] text-sm text-(--muted)">
+          <div className="flex items-center gap-2 px-4 py-3 border-b border-(--border) text-sm text-(--muted)">
             <span className="text-white font-semibold">Products</span>
-            <span className="text-xs bg-[var(--accent)]/15 text-[var(--accent)] px-2 py-0.5 rounded-full">
+            <span className="text-xs bg-(--accent)/15 text-(--accent) px-2 py-0.5 rounded-full">
               {products.length} items
             </span>
           </div>
           <div className="overflow-x-auto">
-            <div className="min-w-[1100px] divide-y divide-[var(--border)]">
+            <div className="min-w-[1100px] divide-y divide-(--border)">
               <div className="flex items-center gap-4 px-4 py-3 text-xs uppercase tracking-wide text-(--muted)">
-                <span className="w-[72px] flex-shrink-0">Image</span>
+                <span className="w-[72px] shrink-0">Image</span>
                 <span className="flex-[1.6] min-w-[180px]">Name</span>
                 <span className="flex-1">SKU</span>
                 <span className="flex-[0.9]">Price</span>
@@ -210,7 +210,7 @@ const page = () => {
                 <img
                   src={item.image}
                   alt={item.name}
-                  className="h-12 w-12 rounded-xl object-cover bg-[var(--surface)] ring-1 ring-[var(--border)]"
+                  className="h-12 w-12 rounded-xl object-cover bg-(--surface) ring-1 ring-(--border)"
                 />
                 <div>
                   <p className="text-white font-semibold">{item.name}</p>
@@ -220,8 +220,8 @@ const page = () => {
               <p className="text-sm text-(--muted) leading-tight">{item.desc}</p>
               <div className="flex items-center justify-between text-sm text-white">
                 <span className="font-semibold">{item.price}</span>
-                <span className="inline-flex items-center gap-2 text-xs px-2 py-1 rounded-full bg-[var(--accent)]/15 text-[var(--accent)]">
-                  <span className="h-2 w-2 rounded-full bg-[var(--accent)]" />
+                <span className="inline-flex items-center gap-2 text-xs px-2 py-1 rounded-full bg-(--accent)/15 text-(--accent)">
+                  <span className="h-2 w-2 rounded-full bg-(--accent)" />
                   {item.status}
                 </span>
               </div>
