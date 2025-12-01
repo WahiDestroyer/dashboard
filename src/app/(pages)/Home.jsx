@@ -22,9 +22,9 @@ const Home = () => {
       <div className="flex items-start justify-between gap-4">
         <div>
           <p className="text-sm muted">Overview</p>
-          <h1 className="text-2xl font-semibold">Dashboard</h1>
+          <h1 className="text-2xl font-semibold ">Dashboard</h1>
           <div className="text-xs mt-1 text-(--muted)">
-            Home <span className="text-(--accent)">/ Dashboard</span>
+            Home <span className="text-(--accent) ">/ Dashboard</span>
           </div>
         </div>
         <div className="pill text-xs">

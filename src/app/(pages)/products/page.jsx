@@ -156,7 +156,7 @@ const page = () => {
     <div className="m-6 space-y-6">
       <div className="flex items-center justify-between pb-7">
         <div>
-          <h2 className="font-poppins text-3xl font-bold text-white leading-8 pb-3.5">
+          <h2 className="font-poppins text-3xl font-bold leading-8 pb-3.5">
             All Products
           </h2>
           <div className="flex items-center gap-2">
@@ -175,7 +175,7 @@ const page = () => {
       {view === "list" ? (
         <div className="card overflow-hidden">
           <div className="flex items-center gap-2 px-4 py-3 border-b border-(--border) text-sm text-(--muted)">
-            <span className="text-white font-semibold">Products</span>
+            <span className=" font-semibold">Products</span>
             <span className="text-xs bg-(--accent)/15 text-(--accent) px-2 py-0.5 rounded-full">
               {products.length} items
             </span>
