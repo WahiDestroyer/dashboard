@@ -161,7 +161,7 @@ const page = () => {
           </h2>
           <div className="flex items-center gap-2">
             <Link href="/" className="text-sm hover:underline flex items-center gap-1">
-              <GoHome /> Home{" "}
+              <GoHome className='text-base'/> Home
             </Link>
             <IoChevronForwardSharp />
             <span className="text-base text-(--accent)"> Products</span>

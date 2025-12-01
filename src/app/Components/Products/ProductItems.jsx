@@ -40,7 +40,7 @@ const ProductItems = ({ product }) => {
         href="/productdetails"
         className="flex items-center gap-4 px-4 py-4 hover:bg-[#181b25] transition-colors text-sm"
       >
-        <div className="w-[72px] flex-shrink-0">
+        <div className="w-[72px] shrink-0">
           <Image
             src={imgSrc}
             alt={name}
